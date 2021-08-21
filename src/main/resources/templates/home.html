@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+    #textCenter{
+    vertical-align:middle;
+    }
+    body{background-color: rgba(219,219,219) ;}
+
+        #bgMain{
+           background-image:url("coverImg.jpeg");
+           background-repeat: no-repeat;
+           background-size: cover;
+           height:600px;
+        }
+        #main{
+        text-align:center;
+        height: 600px;
+        backdrop-filter: brightness(0.5);
+        color:white;
+        text-transform:uppercase;
+        flex-direction: column;
+         display: flex;
+        align-items: center;
+        justify-content: center;
+        }
+      table {
+	width: 800px;
+	border-collapse: collapse;
+	overflow: hidden;
+	box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+th,
+td {
+	padding: 15px;
+	background-color: rgba(255,255,255,0.2);
+	color: black;
+}
+
+th {
+	text-align: left;
+}
+
+thead {
+	th {
+		background-color: #55608f;
+	}
+}
+
+tbody {
+	tr {
+		&:hover {
+			background-color: rgba(255,255,255,0.3);
+		}
+	}
+	td {
+		position: relative;
+		&:hover {
+			&:before {
+				content: "";
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: -9999px;
+				bottom: -9999px;
+				background-color: rgba(255,255,255,0.2);
+				z-index: -1;
+			}
+		}
+	}
+}
+
+    </style>
+</head>
+<body>
+
+<div class="container-fluid" id="bgMain">
+<div class = "container" id="main">
+
+<h1>Corona Virus Tracker</h1>
+<h3>Total Number Of Cases:<h2 style="color:red;" th:text="${totalCases}"></h2></h3>
+
+</div>
+</div>
+
+<div class="container" id="tableDiv">
+    <hr>
+<table class="table">
+    <tr>
+        <thead>
+        <th>State</th>
+        <th>Country</th>
+        <th>Total Cases</th>
+        <th>Since Yesterday</th>
+        </thead>
+    </tr>
+    <tbody>
+    <tr th:each="locationStat : ${locationStats}">
+        <th th:text="${locationStat.state}"></th>
+        <th th:text="${locationStat.country}"></th>
+        <th th:text="${locationStat.latestCases}">0</th>
+        <th th:text="${locationStat.difYesterday}">0</th>
+    </tbody>
+    </tr>
+</table>
+</div>
+</body>
+</html>
